@@ -16,6 +16,6 @@ export default function CookieBar({ store, customer_id = 0, trackingConsent = ()
         }, [])
   
     return (
-       <script src="https://gdprcdn.b-cdn.net/js/gdpr_cookie_consent_headless.min.js"></script>
+       <script src="https://gdprcdn.b-cdn.net/js/gdpr_cookie_consent_headless.original.js"></script>
     )
   }
