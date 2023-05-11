@@ -1,0 +1,21 @@
+import React, { useEffect } from 'react';
+
+export default function CookieBar({ store, customer_id = 0, trackingConsent = () => {}}) {
+    useEffect(() => {
+        window.iSenseAppSettings = {
+            shop: store,
+            customer_id: customer_id || 0,
+            setTrackingConsent: (value) => {
+            if (value) {
+                alert('valid consent');
+            } else {
+                alert('invalid consent')
+            }
+            }
+        }
+        }, [])
+  
+    return (
+       <script src="http://164.90.207.109/js/gdpr_cookie_consent_headless.original.js"></script>
+    )
+  }

@@ -12,6 +12,7 @@ import {
 } from '@remix-run/react';
 import {ShopifySalesChannel, Seo} from '@shopify/hydrogen';
 import {Layout} from '~/components';
+import {CookieBar} from '~/components';
 import {GenericError} from './components/GenericError';
 import {NotFound} from './components/NotFound';
 import styles from './styles/app.css';
@@ -73,6 +74,11 @@ export default function App() {
         <Seo />
         <Meta />
         <Links />
+        <CookieBar
+          store={'shoesforuse.myshopify.com'}
+          customer_id={0}
+          trackingConsent={() => {}}
+        />
       </head>
       <body>
         <Layout
