@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 export default function CookieBar({ store, customer_id = 0, trackingConsent = () => {}}) {
     useEffect(() => {
-        window.consentmoAppSettings = {
+        window.iSenseAppSettings = {
             shop: store,
             customer_id: customer_id || 0,
             setTrackingConsent: (value) => {
