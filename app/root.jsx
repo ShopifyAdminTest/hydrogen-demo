@@ -71,12 +71,85 @@ export default function App() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <script dangerouslySetInnerHTML={{__html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-T3CWJ7KV');`}} />
+
+        <script dangerouslySetInnerHTML={{__html: `window.isenseRules = {};
+  window.isenseRules.gcm = {
+      gcmVersion: 2,
+      integrationVersion: 2,
+      initialState: 7,
+      customChanges: false,
+      consentUpdated: false,
+      adsDataRedaction: true,
+      urlPassthrough: false,
+      storage: { ad_personalization: "granted", ad_storage: "granted", ad_user_data: "granted", analytics_storage: "granted", functionality_storage: "granted", personalization_storage: "granted", security_storage: "granted", wait_for_update: 500 }
+  };
+  window.isenseRules.initializeGcm = function (rules) {
+    let initialState = rules.initialState;
+    let analyticsBlocked = initialState === 0 || initialState === 3 || initialState === 6 || initialState === 7;
+    let marketingBlocked = initialState === 0 || initialState === 2 || initialState === 5 || initialState === 7;
+    let functionalityBlocked = initialState === 4 || initialState === 5 || initialState === 6 || initialState === 7;
+
+    let gdprCache = localStorage.getItem('gdprCache') ? JSON.parse(localStorage.getItem('gdprCache')) : null;
+    if (gdprCache && typeof gdprCache.updatedPreferences !== "undefined") {
+      let updatedPreferences = gdprCache && typeof gdprCache.updatedPreferences !== "undefined" ? gdprCache.updatedPreferences : null;
+      analyticsBlocked = parseInt(updatedPreferences.indexOf('analytics')) > -1;
+      marketingBlocked = parseInt(updatedPreferences.indexOf('marketing')) > -1;
+      functionalityBlocked = parseInt(updatedPreferences.indexOf('functionality')) > -1;
+
+      rules.consentUpdated = true;
+    }
+    
+    isenseRules.gcm = {
+      ...rules,
+      storage: {
+        ad_personalization: marketingBlocked ? "denied" : "granted",
+        ad_storage: marketingBlocked ? "denied" : "granted",
+        ad_user_data: marketingBlocked ? "denied" : "granted",
+        analytics_storage: analyticsBlocked ? "denied" : "granted",
+        functionality_storage: functionalityBlocked ? "denied" : "granted",
+        personalization_storage: functionalityBlocked ? "denied" : "granted",
+        security_storage: "granted",
+        wait_for_update: 500
+      },
+    };
+  }
+
+  // Google Consent Mode - initialization start
+  window.isenseRules.initializeGcm({
+    ...window.isenseRules.gcm,
+    adsDataRedaction: true,
+    urlPassthrough: false,
+    initialState: 7
+  });
+
+  /*
+  * initialState acceptable values:
+  * 0 - Set both ad_storage and analytics_storage to denied
+  * 1 - Set all categories to granted
+  * 2 - Set only ad_storage to denied
+  * 3 - Set only analytics_storage to denied
+  * 4 - Set only functionality_storage to denied
+  * 5 - Set both ad_storage and functionality_storage to denied
+  * 6 - Set both analytics_storage and functionality_storage to denied
+  * 7 - Set all categories to denied
+  */
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { window.dataLayer.push(arguments); }
+  gtag("consent", "default", isenseRules.gcm.storage);
+  isenseRules.gcm.adsDataRedaction && gtag("set", "ads_data_redaction", isenseRules.gcm.adsDataRedaction);
+  isenseRules.gcm.urlPassthrough && gtag("set", "url_passthrough", isenseRules.gcm.urlPassthrough);`}} />
         <Seo />
         <Meta />
         <Links />
         <CookieBar
           store={'shoesforuse.myshopify.com'}
-          customer_id={0}
+          customer_id={data.isLoggedIn}
           trackingConsent={() => {}}
         />
       </head>
