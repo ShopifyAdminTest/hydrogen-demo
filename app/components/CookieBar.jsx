@@ -16,6 +16,9 @@ export default function CookieBar({ store, customer_id = 0, trackingConsent = ()
         }, [])
   
     return (
-       <script src="https://gdpr.apps.isenselabs.com/js/gdpr_cookie_consent_headless.original.js"></script>
+        <>
+            <div id="solidjs_render_here" style="position: fixed;bottom: 0; width: 100%;text-align: center;z-index: 99999999"></div>
+            <script src="https://gdpr.apps.isenselabs.com/webroot/js/solidjs/dist/bundle.js"></script>
+        </>
     )
   }
