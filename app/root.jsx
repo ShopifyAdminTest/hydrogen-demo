@@ -147,13 +147,14 @@ export default function App() {
         <Seo />
         <Meta />
         <Links />
-        <CookieBar
+        
+      </head>
+      <body>
+      <CookieBar
           store={'shoesforuse.myshopify.com'}
           customer_id={data.isLoggedIn}
           trackingConsent={() => {}}
         />
-      </head>
-      <body>
         <Layout
           layout={data.layout}
           key={`${locale.language}-${locale.country}`}
