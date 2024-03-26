@@ -150,7 +150,9 @@ export default function App() {
         
       </head>
       <body>
-      <CookieBar
+        <div id="solidjs_render_here"></div>
+
+        <CookieBar
           store={'shoesforuse.myshopify.com'}
           customer_id={data.isLoggedIn}
           trackingConsent={() => {}}
@@ -192,6 +194,7 @@ export function ErrorBoundary({error}) {
         <Links />
       </head>
       <body>
+
         <Layout
           layout={root?.data?.layout}
           key={`${locale.language}-${locale.country}`}
