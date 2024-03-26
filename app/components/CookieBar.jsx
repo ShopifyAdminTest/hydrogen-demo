@@ -17,7 +17,7 @@ import React, { useEffect } from 'react';
             }
             // Load script here
             const script = document.createElement('script');
-            script.src = 'https://gdpr.apps.isenselabs.com/webroot/js/solidjs/dist/bundle.js';
+            script.src = 'https://gdpr.apps.isenselabs.com/webroot/js/solidjs/dist/bundle.js?asd';
             document.body.appendChild(script);
 
             // Clean up function to remove the script when component unmounts
@@ -27,7 +27,7 @@ import React, { useEffect } from 'react';
         }, []);
 
         return (
-            <></>;
+            <></>
             )
         ; 
     }
