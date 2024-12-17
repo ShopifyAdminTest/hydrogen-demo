@@ -151,7 +151,7 @@ export default function App() {
       </head>
       <body>
         <div id="solidjs_render_here"></div>
-
+<script src="https://cdn.shopify.com/shopifycloud/consent-tracking-api/v0.1/consent-tracking-api.js"></script>
         <CookieBar
           store={'shoesforuse.myshopify.com'}
           customer_id={data.isLoggedIn}
@@ -183,7 +183,7 @@ export function ErrorBoundary({error}) {
     title = 'Not found';
     if (routeError.status === 404) pageType = routeError.data || pageType;
   }
-
+ 
   return (
     <html lang={locale.language}>
       <head>
